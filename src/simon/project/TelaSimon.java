@@ -37,51 +37,51 @@ public class TelaSimon extends JFrame implements ActionListener {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
-		
+
 		JLabel lblNewLabel = new JLabel("Digite seu nome");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		panel.add(lblNewLabel);
-		
+
 		txtNewPlayer = new JTextField();
 		txtNewPlayer.setHorizontalAlignment(SwingConstants.CENTER);
 		txtNewPlayer.setText("new player");
 		panel.add(txtNewPlayer);
 		txtNewPlayer.setColumns(10);
-		
+
 		JButton btnComecar = new JButton("Come\u00E7ar!");
 		btnComecar.setBackground(new Color(206,147,216));
 		btnComecar.setForeground(Color.WHITE);
 		btnComecar.addActionListener(this);
 		panel.add(btnComecar);
-		
+
 		JPanel cores = new JPanel();
 		contentPane.add(cores, BorderLayout.CENTER);
 		cores.setLayout(new GridLayout(2, 2, 0, 0));
-		
+
 		btnAzul = new JButton("AZUL");
 		btnAzul.setForeground(new Color(25,118,210));
 		btnAzul.setBackground(Color.WHITE);
 		cores.add(btnAzul);
-		
+
 		btnAmarelo = new JButton("AMARELO");
 		btnAmarelo.setForeground(new Color(255,160,0));
 		btnAmarelo.setBackground(Color.WHITE);
 		cores.add(btnAmarelo);
-		
+
 		btnVermelho = new JButton("VERMELHO");
 		btnVermelho.setBackground(Color.WHITE);
 		btnVermelho.setForeground(new Color(211,47,47));
 		cores.add(btnVermelho);
-		
+
 		btnVerde = new JButton("VERDE");
 		btnVerde.setForeground(new Color(56,142,60));
 		btnVerde.setBackground(Color.WHITE);
 		cores.add(btnVerde);
 
-		
+
 		JLabel lblcaroDeLima = new JLabel("\u00CDcaro de Lima POO 2017");
 		lblcaroDeLima.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblcaroDeLima, BorderLayout.SOUTH);
@@ -107,14 +107,14 @@ public class TelaSimon extends JFrame implements ActionListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
+
+
 		txtNewPlayer.setEditable(false);
-		
+
 		gthread = new GameThread(this);
 //		gthread.run();
 		new Thread(gthread).start();
 	}
-	
+
 }
 
