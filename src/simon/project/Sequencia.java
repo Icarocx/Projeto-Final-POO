@@ -37,4 +37,9 @@ public class Sequencia {
 	{
 		return this.seq.size();
 	}
+	
+	public ArrayList<Integer> getSeq() {
+		return seq;
+	}
+	
 }

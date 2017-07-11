@@ -7,4 +7,12 @@ new player --> 0
 new player --> 1
 new player --> 4
 Ícaro --> 2
-new player --
+new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --> 1
+new player --> 0
+new player --> 0
+new player --> 0
+new player --> 1
+new player --new player --> 0
+new player --> 0
+new player --new player --new player --new player --new player --> 2
+new player --new player --new player --new player --

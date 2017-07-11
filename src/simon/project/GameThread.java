@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class GameThread implements Runnable{
@@ -17,7 +18,9 @@ public class GameThread implements Runnable{
 	private JogadorListener jogador;
 	private String cor;
 	
-	public GameThread()
+	private JFrame tela;
+	
+	public GameThread(JFrame tela)
 	{
 		lista = new File("ListaCores.txt");
 		try {
@@ -32,6 +35,8 @@ public class GameThread implements Runnable{
 		sequencia = new Sequencia();
 		cores = new SCores();
 		jogador = new JogadorListener();
+		
+		this.tela = tela;
 	}
 	@Override
 	public void run() {
@@ -51,11 +56,15 @@ public class GameThread implements Runnable{
 		}finally{
 			this.close();
 		}
-			cor = cores.ler(sequencia.ultimo());
-			Thread c = new Thread(new Runnable(){
-
-				@Override
-				public void run() {
+		
+			for (int i = 0;i<sequencia.getSeq().size();i++)	{	
+//				cor = cores.ler(i);
+//				System.out.println( "A cor é : " + cor + " id " + i);
+			cor = cores.ler(sequencia.getSeq().get(i));
+//			Thread c = new Thread(new Runnable(){
+//
+//				@Override
+//				public void run() {
 					TelaSimon.btnAmarelo.setEnabled(false);
 					TelaSimon.btnAzul.setEnabled(false);
 					TelaSimon.btnVerde.setEnabled(false);
@@ -69,6 +78,7 @@ public class GameThread implements Runnable{
 					switch(cor){
 					case "VERDE":
 						TelaSimon.btnVerde.setBackground(Color.GREEN);
+						tela.revalidate();
 						try {
 							Thread.sleep(1000);
 						} catch (InterruptedException e4) {
@@ -122,8 +132,9 @@ public class GameThread implements Runnable{
 					TelaSimon.btnAzul.setEnabled(true);
 					TelaSimon.btnVerde.setEnabled(true);
 					TelaSimon.btnVermelho.setEnabled(true);
-				}
-			});c.start();
+			}
+//				}
+//			});c.start();
 		try{
 			TelaSimon.btnVerde.removeActionListener(jogador);
 			TelaSimon.btnVermelho.removeActionListener(jogador);
@@ -142,6 +153,8 @@ public class GameThread implements Runnable{
 		TelaSimon.btnVerde.setEnabled(true);
 		TelaSimon.btnVermelho.setEnabled(true);
 
+		System.out.println("RODANDO A THREAD");
+		
 	}
 	
 	public void close()

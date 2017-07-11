@@ -111,9 +111,10 @@ public class TelaSimon extends JFrame implements ActionListener {
 		
 		txtNewPlayer.setEditable(false);
 		
-		gthread = new GameThread();
-		gthread.run();
+		gthread = new GameThread(this);
+//		gthread.run();
+		new Thread(gthread).start();
 	}
-
+	
 }
 

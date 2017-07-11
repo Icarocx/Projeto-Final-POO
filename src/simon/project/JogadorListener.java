@@ -17,7 +17,7 @@ public class JogadorListener implements ActionListener{
 	private File lista;
 	private FileReader listLoader;
 	private BufferedReader buffLoader;
-	private String botao;
+	public static String botao;
 	public static int i=0;
 	
 	public JogadorListener()
@@ -44,7 +44,7 @@ public class JogadorListener implements ActionListener{
 				try{
 					if(cores.get(i).compareTo(botao)!=0)
 					{
-
+						System.out.println(cores.get(i) + " " +  i + "   :  " + botao );
 						JOptionPane.showMessageDialog(null,"VOCÊ PERDEU!\n A cor era " + cores.get(i)+", PONTUAÇÃO: "+(cores.size()-1));
 						FileWriter pontuacao = new FileWriter("Player.txt",true);
 						@SuppressWarnings("resource")
@@ -56,6 +56,7 @@ public class JogadorListener implements ActionListener{
 					}
 					else
 					{
+						System.out.println(cores.get(i) + " " +  i + "   :  " + botao );
 						TelaSimon.btnAmarelo.setEnabled(true);
 						TelaSimon.btnAzul.setEnabled(true);
 						TelaSimon.btnVerde.setEnabled(true);
@@ -66,7 +67,7 @@ public class JogadorListener implements ActionListener{
 					if(i>= cores.size())
 					{
 						i=0;
-						TelaSimon.gthread.run();
+						new Thread(TelaSimon.gthread).start();
 					}
 				}catch(Exception e){
 					i=0;
