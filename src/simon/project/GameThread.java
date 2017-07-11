@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -17,10 +18,14 @@ public class GameThread implements Runnable{
 	private SCores cores;
 	private JogadorListener jogador;
 	private String cor;
+	private JButton btnAzul;
+	private JButton btnAmarelo;
+	private JButton btnVerde;
+	private JButton btnVermelho;
 	
 	private JFrame tela;
 	
-	public GameThread(JFrame tela)
+	public GameThread(JFrame tela, JButton amarelo, JButton azul, JButton verde, JButton vermelho)
 	{
 		lista = new File("ListaCores.txt");
 		try {
@@ -34,16 +39,21 @@ public class GameThread implements Runnable{
 		}
 		sequencia = new Sequencia();
 		cores = new SCores();
-		jogador = new JogadorListener();
+		jogador = new JogadorListener(amarelo,azul,verde,vermelho);
+		this.btnAmarelo = amarelo;
+		this.btnAzul = azul;
+		this.btnVerde = verde;
+		this.btnVermelho = vermelho;
+		
 		
 		this.tela = tela;
 	}
 	@Override
 	public void run() {
-		TelaSimon.btnAmarelo.setEnabled(false);
-		TelaSimon.btnAzul.setEnabled(false);
-		TelaSimon.btnVerde.setEnabled(false);
-		TelaSimon.btnVermelho.setEnabled(false);
+		btnAmarelo.setEnabled(false);
+		btnAzul.setEnabled(false);
+		btnVerde.setEnabled(false);
+		btnVermelho.setEnabled(false);
 		sequencia.adicionar(cores.gera());
 		try {
 			listSaver = new FileWriter(lista,true);
@@ -58,102 +68,92 @@ public class GameThread implements Runnable{
 		}
 		
 			for (int i = 0;i<sequencia.getSeq().size();i++)	{	
-//				cor = cores.ler(i);
-//				System.out.println( "A cor é : " + cor + " id " + i);
 			cor = cores.ler(sequencia.getSeq().get(i));
-//			Thread c = new Thread(new Runnable(){
-//
-//				@Override
-//				public void run() {
-					TelaSimon.btnAmarelo.setEnabled(false);
-					TelaSimon.btnAzul.setEnabled(false);
-					TelaSimon.btnVerde.setEnabled(false);
-					TelaSimon.btnVermelho.setEnabled(false);
+					btnAmarelo.setEnabled(false);
+					btnAzul.setEnabled(false);
+					btnVerde.setEnabled(false);
+					btnVermelho.setEnabled(false);
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(600);
 					} catch (InterruptedException e5) {
 						// TODO Auto-generated catch block
 						e5.printStackTrace();
 					}
 					switch(cor){
 					case "VERDE":
-						TelaSimon.btnVerde.setBackground(Color.GREEN);
+						btnVerde.setBackground(Color.GREEN);
 						tela.revalidate();
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(600);
 						} catch (InterruptedException e4) {
 							// TODO Auto-generated catch block
 							e4.printStackTrace();
 						}
-						TelaSimon.btnVerde.setBackground(Color.WHITE);
+						btnVerde.setBackground(Color.WHITE);
 						break;
 					case "VERMELHO":
-						TelaSimon.btnVermelho.setBackground(Color.RED);
+						btnVermelho.setBackground(Color.RED);
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(600);
 						} catch (InterruptedException e3) {
 							// TODO Auto-generated catch block
 							e3.printStackTrace();
 						}
-						TelaSimon.btnVermelho.setBackground(Color.WHITE);
+						btnVermelho.setBackground(Color.WHITE);
 						break;
 					case "AZUL":
-						TelaSimon.btnAzul.setBackground(Color.BLUE);
+						btnAzul.setBackground(Color.BLUE);
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(600);
 						} catch (InterruptedException e2) {
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
 						}
-						TelaSimon.btnAzul.setBackground(Color.WHITE);
+						btnAzul.setBackground(Color.WHITE);
 						break;
 					case "AMARELO":
-						TelaSimon.btnAmarelo.setBackground(Color.YELLOW);
+						btnAmarelo.setBackground(Color.YELLOW);
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(600);
 						} catch (InterruptedException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						TelaSimon.btnAmarelo.setBackground(Color.WHITE);
+						btnAmarelo.setBackground(Color.WHITE);
 						break;
 					}
 					try {
-						Thread.sleep(1000);
+						Thread.sleep(400);
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					TelaSimon.btnAmarelo.setBackground(Color.WHITE);
-					TelaSimon.btnAzul.setBackground(Color.WHITE);
-					TelaSimon.btnVerde.setBackground(Color.WHITE);
-					TelaSimon.btnVermelho.setBackground(Color.WHITE);
-					TelaSimon.btnAmarelo.setEnabled(true);
-					TelaSimon.btnAzul.setEnabled(true);
-					TelaSimon.btnVerde.setEnabled(true);
-					TelaSimon.btnVermelho.setEnabled(true);
+					btnAmarelo.setBackground(Color.WHITE);
+					btnAzul.setBackground(Color.WHITE);
+					btnVerde.setBackground(Color.WHITE);
+					btnVermelho.setBackground(Color.WHITE);
+					btnAmarelo.setEnabled(true);
+					btnAzul.setEnabled(true);
+					btnVerde.setEnabled(true);
+					btnVermelho.setEnabled(true);
 			}
-//				}
-//			});c.start();
 		try{
-			TelaSimon.btnVerde.removeActionListener(jogador);
-			TelaSimon.btnVermelho.removeActionListener(jogador);
-			TelaSimon.btnAzul.removeActionListener(jogador);
-			TelaSimon.btnAmarelo.removeActionListener(jogador);
+			btnVerde.removeActionListener(jogador);
+			btnVermelho.removeActionListener(jogador);
+			btnAzul.removeActionListener(jogador);
+			btnAmarelo.removeActionListener(jogador);
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Error!");
 			System.exit(0);
 		}
-		TelaSimon.btnVerde.addActionListener(jogador);
-		TelaSimon.btnVermelho.addActionListener(jogador);
-		TelaSimon.btnAzul.addActionListener(jogador);
-		TelaSimon.btnAmarelo.addActionListener(jogador);
-		TelaSimon.btnAmarelo.setEnabled(true);
-		TelaSimon.btnAzul.setEnabled(true);
-		TelaSimon.btnVerde.setEnabled(true);
-		TelaSimon.btnVermelho.setEnabled(true);
-
-		System.out.println("RODANDO A THREAD");
+		btnVerde.addActionListener(jogador);
+		btnVermelho.addActionListener(jogador);
+		btnAzul.addActionListener(jogador);
+		btnAmarelo.addActionListener(jogador);
+		btnAmarelo.setEnabled(true);
+		btnAzul.setEnabled(true);
+		btnVerde.setEnabled(true);
+		btnVermelho.setEnabled(true);
 		
 	}
 	

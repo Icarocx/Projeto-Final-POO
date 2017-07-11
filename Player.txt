@@ -15,4 +15,10 @@ new player --> 1
 new player --new player --> 0
 new player --> 0
 new player --new player --new player --new player --new player --> 2
-new player --new player --new player --new player --
+new player --new player --new player --new player --new player --> 6
+new player --> 2
+Ícaro --> 6
+Carlos --> 3
+new player --> 4
+new player --> 3
+new player --> 3

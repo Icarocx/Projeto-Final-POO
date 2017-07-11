@@ -23,10 +23,10 @@ public class TelaSimon extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
 	private JTextField txtNewPlayer;
-	public static JButton btnAzul;
-	public static JButton btnAmarelo;
-	public static JButton btnVerde;
-	public static JButton btnVermelho;
+	private JButton btnAzul;
+	private JButton btnAmarelo;
+	private JButton btnVerde;
+	private JButton btnVermelho;
 	public static GameThread gthread;
 
 	public TelaSimon() {
@@ -111,8 +111,7 @@ public class TelaSimon extends JFrame implements ActionListener {
 
 		txtNewPlayer.setEditable(false);
 
-		gthread = new GameThread(this);
-//		gthread.run();
+		gthread = new GameThread(this,btnAmarelo,btnAzul,btnVerde,btnVermelho);
 		new Thread(gthread).start();
 	}
 

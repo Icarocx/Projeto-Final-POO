@@ -17,21 +17,29 @@ public class JogadorListener implements ActionListener{
 	private File lista;
 	private FileReader listLoader;
 	private BufferedReader buffLoader;
+	private JButton btnAzul;
+	private JButton btnAmarelo;
+	private JButton btnVerde;
+	private JButton btnVermelho;
 	public static String botao;
 	public static int i=0;
 	
-	public JogadorListener()
+	public JogadorListener(JButton amarelo, JButton azul, JButton verde, JButton vermelho)
 	{
 		lista = new File("ListaCores.txt");
+		this.btnAmarelo = amarelo;
+		this.btnAzul = azul;
+		this.btnVerde = verde;
+		this.btnVermelho = vermelho;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent a) {
 		botao = ((JButton) a.getSource()).getText();
-		TelaSimon.btnAmarelo.setEnabled(false);
-		TelaSimon.btnAzul.setEnabled(false);
-		TelaSimon.btnVerde.setEnabled(false);
-		TelaSimon.btnVermelho.setEnabled(false);
+		btnAmarelo.setEnabled(false);
+		btnAzul.setEnabled(false);
+		btnVerde.setEnabled(false);
+		btnVermelho.setEnabled(false);
 		try {
 			listLoader = new FileReader(lista);
 			buffLoader = new BufferedReader(listLoader);
@@ -44,8 +52,7 @@ public class JogadorListener implements ActionListener{
 				try{
 					if(cores.get(i).compareTo(botao)!=0)
 					{
-						System.out.println(cores.get(i) + " " +  i + "   :  " + botao );
-						JOptionPane.showMessageDialog(null,"VOCÊ PERDEU!\n A cor era " + cores.get(i)+", PONTUAÇÃO: "+(cores.size()-1));
+						JOptionPane.showMessageDialog(null,"VOCÊ PERDEU!\n A cor era " + cores.get(i)+"\nPONTUAÇÃO: "+(cores.size()-1));
 						FileWriter pontuacao = new FileWriter("Player.txt",true);
 						@SuppressWarnings("resource")
 						BufferedWriter buffpont = new BufferedWriter(pontuacao);
@@ -56,11 +63,10 @@ public class JogadorListener implements ActionListener{
 					}
 					else
 					{
-						System.out.println(cores.get(i) + " " +  i + "   :  " + botao );
-						TelaSimon.btnAmarelo.setEnabled(true);
-						TelaSimon.btnAzul.setEnabled(true);
-						TelaSimon.btnVerde.setEnabled(true);
-						TelaSimon.btnVermelho.setEnabled(true);
+						btnAmarelo.setEnabled(true);
+						btnAzul.setEnabled(true);
+						btnVerde.setEnabled(true);
+						btnVermelho.setEnabled(true);
 					}
 					
 					i++;

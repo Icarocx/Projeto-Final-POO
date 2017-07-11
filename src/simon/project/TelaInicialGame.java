@@ -21,6 +21,7 @@ public class TelaInicialGame extends JFrame {
 	
 	public static void main(String[]Args)
 	{
+		//MAIN
 		TelaInicialGame tela = new TelaInicialGame();
 		tela.setVisible(true);
 	}
@@ -48,8 +49,8 @@ public class TelaInicialGame extends JFrame {
 		txtRegras.setEditable(false);
 		panel.add(txtRegras, BorderLayout.CENTER);
 		txtRegras.setText("1. Digite seu nome e pressione começar para iniciar o jogo."+"\n"+
-		"2. Os quadros acenderão um por rodada, porém,"+"\n"+"para prosseguir, você deve memorizar toda a sequencia"+"\n"+
-				"3. A cada rodada só será acesso o quadro que representa a nova cor da\n sequência! Então memorize bem todo o resto!"+
+		"2. Os quadros acenderão com a sequencia,"+"\n"+"para prosseguir, você deve memorizar toda a sequencia"+"\n"+
+				"3. A cada rodada só será acesso um quadro que representa a nova cor da\n sequência! Então memorize bem todo o resto!"+
 		"\n\n BOA SORTE!");
 		
 		JPanel panel_1 = new JPanel();
