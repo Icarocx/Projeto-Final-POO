@@ -2,7 +2,6 @@ package simon.project;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+@SuppressWarnings("serial")
 public class TelaSimon extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
@@ -27,30 +27,8 @@ public class TelaSimon extends JFrame implements ActionListener {
 	public static JButton btnAmarelo;
 	public static JButton btnVerde;
 	public static JButton btnVermelho;
-	public static Thread t;
-	
-	private JogadorListener jogador;
 	public static GameThread gthread;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaSimon frame = new TelaSimon();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaSimon() {
 		setTitle("Simon Game");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,43 +62,35 @@ public class TelaSimon extends JFrame implements ActionListener {
 		cores.setLayout(new GridLayout(2, 2, 0, 0));
 		
 		btnAzul = new JButton("AZUL");
-		btnAzul.setForeground(Color.BLUE);
-		btnAzul.setBackground(new Color(255,255,255));
+		btnAzul.setForeground(new Color(25,118,210));
+		btnAzul.setBackground(Color.WHITE);
 		cores.add(btnAzul);
 		
 		btnAmarelo = new JButton("AMARELO");
-		btnAmarelo.setForeground(Color.ORANGE);
+		btnAmarelo.setForeground(new Color(255,160,0));
 		btnAmarelo.setBackground(Color.WHITE);
 		cores.add(btnAmarelo);
 		
 		btnVermelho = new JButton("VERMELHO");
-		btnVermelho.setBackground(new Color(255, 255, 255));
-		btnVermelho.setForeground(Color.RED);
+		btnVermelho.setBackground(Color.WHITE);
+		btnVermelho.setForeground(new Color(211,47,47));
 		cores.add(btnVermelho);
 		
 		btnVerde = new JButton("VERDE");
-		btnVerde.setForeground(Color.GREEN);
-		btnVerde.setBackground(new Color(255, 255, 255));
+		btnVerde.setForeground(new Color(56,142,60));
+		btnVerde.setBackground(Color.WHITE);
 		cores.add(btnVerde);
 
 		
 		JLabel lblcaroDeLima = new JLabel("\u00CDcaro de Lima POO 2017");
 		lblcaroDeLima.setHorizontalAlignment(SwingConstants.CENTER);
 		contentPane.add(lblcaroDeLima, BorderLayout.SOUTH);
-//		TelaSimon.btnVerde.addActionListener(jogador);
-//		TelaSimon.btnVermelho.addActionListener(jogador);
-//		TelaSimon.btnAzul.addActionListener(jogador);
-//		TelaSimon.btnAmarelo.addActionListener(jogador);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent ae) {
 		File arq = new File("Player.txt");
 		FileWriter fw = null;
-//		TelaSimon.btnVerde.addActionListener(jogador);
-//		TelaSimon.btnVermelho.addActionListener(jogador);
-//		TelaSimon.btnAzul.addActionListener(jogador);
-//		TelaSimon.btnAmarelo.addActionListener(jogador);
 		try {
 			arq.createNewFile();
 			fw = new FileWriter(arq,true);
@@ -142,8 +112,6 @@ public class TelaSimon extends JFrame implements ActionListener {
 		txtNewPlayer.setEditable(false);
 		
 		gthread = new GameThread();
-//		t = new Thread(gthread);
-//		t.start();
 		gthread.run();
 	}
 

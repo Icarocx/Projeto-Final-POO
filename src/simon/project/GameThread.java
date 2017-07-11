@@ -5,8 +5,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.swing.JOptionPane;
 
@@ -17,8 +15,7 @@ public class GameThread implements Runnable{
 	private Sequencia sequencia;
 	private SCores cores;
 	private JogadorListener jogador;
-	private boolean espera;
-	private int j;
+	private String cor;
 	
 	public GameThread()
 	{
@@ -38,7 +35,6 @@ public class GameThread implements Runnable{
 	}
 	@Override
 	public void run() {
-		espera = false;
 		TelaSimon.btnAmarelo.setEnabled(false);
 		TelaSimon.btnAzul.setEnabled(false);
 		TelaSimon.btnVerde.setEnabled(false);
@@ -55,32 +51,15 @@ public class GameThread implements Runnable{
 		}finally{
 			this.close();
 		}
-		
-		for(int i=0;i<sequencia.tamanho();i++)
-		{
-			j=0;
-			System.out.println("j = "+j);
-			String cor = cores.ler(sequencia.checar(i));
+			cor = cores.ler(sequencia.ultimo());
 			Thread c = new Thread(new Runnable(){
 
 				@Override
 				public void run() {
-					j++;
-					try {
-						if(j>1)
-						{
-							System.out.println("Vou dormir");
-							Thread.sleep(j*1000);
-						}
-					} catch (InterruptedException e6) {
-						// TODO Auto-generated catch block
-						e6.printStackTrace();
-					}
 					TelaSimon.btnAmarelo.setEnabled(false);
 					TelaSimon.btnAzul.setEnabled(false);
 					TelaSimon.btnVerde.setEnabled(false);
 					TelaSimon.btnVermelho.setEnabled(false);
-					System.out.println("Passando por aqui");
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e5) {
@@ -96,7 +75,7 @@ public class GameThread implements Runnable{
 							// TODO Auto-generated catch block
 							e4.printStackTrace();
 						}
-						TelaSimon.btnVerde.setBackground(Color.WHITE);espera=false;
+						TelaSimon.btnVerde.setBackground(Color.WHITE);
 						break;
 					case "VERMELHO":
 						TelaSimon.btnVermelho.setBackground(Color.RED);
@@ -106,7 +85,7 @@ public class GameThread implements Runnable{
 							// TODO Auto-generated catch block
 							e3.printStackTrace();
 						}
-						TelaSimon.btnVermelho.setBackground(Color.WHITE);espera=false;
+						TelaSimon.btnVermelho.setBackground(Color.WHITE);
 						break;
 					case "AZUL":
 						TelaSimon.btnAzul.setBackground(Color.BLUE);
@@ -116,7 +95,7 @@ public class GameThread implements Runnable{
 							// TODO Auto-generated catch block
 							e2.printStackTrace();
 						}
-						TelaSimon.btnAzul.setBackground(Color.WHITE);espera=false;
+						TelaSimon.btnAzul.setBackground(Color.WHITE);
 						break;
 					case "AMARELO":
 						TelaSimon.btnAmarelo.setBackground(Color.YELLOW);
@@ -126,7 +105,7 @@ public class GameThread implements Runnable{
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						TelaSimon.btnAmarelo.setBackground(Color.WHITE);espera=false;
+						TelaSimon.btnAmarelo.setBackground(Color.WHITE);
 						break;
 					}
 					try {
@@ -145,16 +124,14 @@ public class GameThread implements Runnable{
 					TelaSimon.btnVermelho.setEnabled(true);
 				}
 			});c.start();
-		}
-		System.out.println("Passou pela Thread");
-		
 		try{
 			TelaSimon.btnVerde.removeActionListener(jogador);
 			TelaSimon.btnVermelho.removeActionListener(jogador);
 			TelaSimon.btnAzul.removeActionListener(jogador);
 			TelaSimon.btnAmarelo.removeActionListener(jogador);
 		}catch(Exception e){
-			//TODO
+			JOptionPane.showMessageDialog(null, "Error!");
+			System.exit(0);
 		}
 		TelaSimon.btnVerde.addActionListener(jogador);
 		TelaSimon.btnVermelho.addActionListener(jogador);
