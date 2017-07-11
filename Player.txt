@@ -1,0 +1,41 @@
+Victor --Oracio --Carlos --> 3
+new player --new player --new player --new player --new player --> 0
+new player --> 2
+new player --> 0
+new player --Caio --> 3
+new player --new player --> 3
+new player --new player --new player --> 0
+new player --> 0
+new player --new player --new player --new player --> 3
+new player --> 2
+new player --new player --new player --> 3
+new player --> 1
+new player --new player --new player --> 1
+new player --> 1
+new player --> 0
+new player --new player --new player --> 1
+new player --> 1
+new player --new player --> 1
+new player --> 1
+new player --> 1
+new player --new player --> 3
+new player --> 3
+new player --> 2
+new player --new player --new player --> 3
+new player --new player --new player --new player --> 1
+new player --> 0
+new player --new player --new player --> 3
+Cu --new player --new player --new player --new player --new player --new player --new player --new player --new player --new player --> 1
+new player --> 1
+new player --new player --> 3
+new player --> 3
+new player --new player --new player --new player --> 1
+new player --new player --new player --new player --new player --new player --> 1
+new player --new player --> 2
+new player --new player --> 2
+new player --> 4
+new player --> 1
+new player --> 2
+Ícaro --> 2
+new player --> 2
+new player --
